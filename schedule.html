@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MindGrow | Schedule</title>
+
+  <style>
+    /* === Page Base === */
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #0b0b0b, #1a1a1a);
+      color: #e0e0e0;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* === Navigation Bar === */
+    nav {
+      background: rgba(25, 25, 25, 0.8);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 15px 0;
+      box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #64ffda;
+      font-weight: 600;
+      font-size: 18px;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #ffffff;
+      text-shadow: 0 0 8px #64ffda;
+    }
+
+    /* === Header Section === */
+    header {
+      text-align: center;
+      padding: 70px 20px 40px;
+    }
+
+    header h1 {
+      font-size: 2.8em;
+      color: #64ffda;
+      text-shadow: 0 0 20px #64ffda;
+      animation: glowPulse 3s infinite;
+    }
+
+    header p {
+      max-width: 600px;
+      margin: 10px auto;
+      color: #cfcfcf;
+      font-size: 1.1em;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 10px #64ffda; }
+      50% { text-shadow: 0 0 25px #64ffda; }
+    }
+
+    /* === Schedule Table === */
+    .schedule-container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 30px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 0 20px rgba(100, 255, 218, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    th {
+      color: #64ffda;
+      font-size: 1.1em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid rgba(100, 255, 218, 0.5);
+    }
+
+    tr:hover {
+      background: rgba(100, 255, 218, 0.1);
+      transition: background 0.3s ease;
+    }
+
+    td {
+      color: #ccc;
+      font-size: 0.95em;
+    }
+
+    /* === Footer === */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.1);
+      color: #888;
+      padding: 20px;
+      margin-top: 50px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* === Responsive Design === */
+    @media (max-width: 700px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+      th {
+        display: none;
+      }
+      td {
+        position: relative;
+        padding-left: 50%;
+        text-align: left;
+        border: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+      td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 15px;
+        color: #64ffda;
+        font-weight: bold;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- === Navigation Bar === -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="programs.html">Programs</a></li>
+      <li><a href="schedule.html" class="active">Schedule</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- === Header Section === -->
+  <header>
+    <h1>Weekly Schedule</h1>
+    <p>Find your ideal time to grow your mind. Our sessions are crafted for consistency and progress.</p>
+  </header>
+
+  <!-- === Schedule Table === -->
+  <section class="schedule-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Program</th>
+          <th>Time</th>
+          <th>Instructor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Day">Monday</td>
+          <td data-label="Program">Mindfulness Basics</td>
+          <td data-label="Time">08:00 AM – 09:30 AM</td>
+          <td data-label="Instructor">Dr. L. Moyo</td>
+        </tr>
+        <tr>
+          <td data-label="Day">Tuesday</td>
+          <td data-label="Program">Focus & Productivity</td>
+          <td data-label="Time">10:00 AM – 11:30 AM</td>
+          <td data-label="Instructor">T. Banda</td>
+        </tr>
+        <tr>
+          <td data-label="Day">Wednesday</td>
+          <td data-label="Program">Confidence Coaching</td>
+          <td data-label="Time">02:00 PM – 03:30 PM</td>
+          <td data-label="Instructor">N. Dube</td>
+        </tr>
+        <tr>
+          <td data-label="Day">Thursday</td>
+          <td data-label="Program">Emotional Intelligence</td>
+          <td data-label="Time">09:00 AM – 10:30 AM</td>
+          <td data-label="Instructor">K. Mthethwa</td>
+        </tr>
+        <tr>
+          <td data-label="Day">Friday</td>
+          <td data-label="Program">Growth Habits Workshop</td>
+          <td data-label="Time">01:00 PM – 02:30 PM</td>
+          <td data-label="Instructor">Dr. A. Sithole</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- === Footer === -->
+  <footer>
+    © 2025 MindGrow | Empower your week. Shape your future.
+  </footer>
+
+</body>
+</html>

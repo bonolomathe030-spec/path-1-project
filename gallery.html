@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unique Image Gallery</title>
+
+<style>
+  body {
+    font-family: 'Georgia', serif;
+    font-style: italic; /* All text in italic */
+    background:#565c66; /* Light, clean background */
+    color: #333;
+    text-align: center;
+    padding: 50px;
+  }
+
+  h1 {
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+
+  .gallery {
+    max-width: 650px;
+    margin: auto;
+    border-radius: 15px;
+    overflow: hidden;
+    border: 2px solid #ccc;
+    background: #434a55;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+  }
+
+  .gallery:hover {
+    transform: scale(1.02); /* subtle hover effect */
+  }
+
+  img {
+    width: 100%;
+    display: block;
+    transition: transform 0.5s;
+  }
+
+  img:hover {
+    transform: scale(1.05); /* slight zoom on hover */
+  }
+
+  .controls {
+    margin-top: 15px;
+  }
+
+  button {
+    padding: 10px 25px;
+    margin: 0 10px;
+    border: 2px solid #555;
+    border-radius: 10px;
+    background: #fff;
+    color: #333;
+    font-style: italic;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background: #eee;
+    border-color: #000;
+  }
+
+  .counter {
+    margin-top: 10px;
+    font-size: 18px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<h1>Sanctuary Gallery</h1>
+
+<div class="gallery">
+  <img id="galleryImage" src="" alt="Gallery Image">
+  <div class="controls">
+    <button onclick="prevImage()">Previous</button>
+    <button onclick="nextImage()">Next</button>
+  </div>
+  <div class="counter" id="counter"></div>
+</div>
+
+<script>
+  // Array of image URLs
+  const images = [
+    'https://picsum.photos/id/1015/650/400',
+    'https://picsum.photos/id/1016/650/400',
+    'https://picsum.photos/id/1018/650/400',
+    'https://picsum.photos/id/1020/650/400',
+    'https://picsum.photos/id/1024/650/400',
+    'https://picsum.photos/id/1025/650/400'
+  ];
+
+  let currentIndex = 0;
+
+  function showImage() {
+    const img = document.getElementById('galleryImage');
+    img.src = images[currentIndex];
+    document.getElementById('counter').innerText = `${currentIndex + 1} of ${images.length}`;
+  }
+
+  function nextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    showImage();
+  }
+
+  function prevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    showImage();
+  }
+
+  // Initialize gallery
+  showImage();
+</script>
+
+</body>
+</html>

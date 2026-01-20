@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindGrow | Programs</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* === Programs Page Specific Styles === */
+
+    body {
+      background: radial-gradient(circle at center, #1b1b1b, #0f0f0f);
+      color: #e0e0e0;
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    nav {
+      background: rgba(30, 30, 30, 0.6);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px rgba(0, 255, 200, 0.2);
+      padding: 15px 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #64ffda;
+      font-weight: bold;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #fff;
+      text-shadow: 0 0 10px #64ffda;
+    }
+
+    h1 {
+      margin-top: 60px;
+      font-size: 2.5em;
+      color: #64ffda;
+      text-shadow: 0 0 15px #64ffda;
+      animation: glowPulse 3s infinite;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { text-shadow: 0 0 10px #64ffda; }
+      50% { text-shadow: 0 0 25px #64ffda; }
+    }
+
+    .program-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      padding: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .program-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 25px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 0 15px rgba(100, 255, 218, 0.2);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .program-card:hover {
+      transform: scale(1.05) translateY(-8px);
+      box-shadow: 0 0 25px rgba(100, 255, 218, 0.4);
+    }
+
+    .program-card h3 {
+      color: #64ffda;
+      margin-bottom: 10px;
+    }
+
+    .program-card p {
+      color: #ccc;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px 0;
+      font-size: 0.9em;
+      color: #aaa;
+      background: rgba(30, 30, 30, 0.7);
+      backdrop-filter: blur(6px);
+    }
+  </style>
+</head>
+
+<body>
+ 
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="programs.html" class="active">Programs</a></li>
+      <li><a href="schedule.html">Schedule</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  
+  <section>
+    <h1>MindGrow Programs</h1>
+    <div class="program-container">
+      
+      <div class="program-card">
+        <h3> Mindfulness & Calm</h3>
+        <p>Learn to control your thoughts, reduce stress, and find inner peace through guided meditation and focus sessions.</p>
+      </div>
+
+      <div class="program-card">
+        <h3>Focus Mastery</h3>
+        <p>Train your attention span and learn techniques to stay productive, avoid distractions, and achieve mental clarity.</p>
+      </div>
+
+      <div class="program-card">
+        <h3> Emotional Intelligence</h3>
+        <p>Understand emotions deeply and build empathy, resilience, and communication skills to thrive in life and work.</p>
+      </div>
+
+      <div class="program-card">
+        <h3> Self-Awareness Journey</h3>
+        <p>Explore who you are through reflection exercises, journaling, and growth techniques that expand your mindset.</p>
+      </div>
+
+      <div class="program-card">
+        <h3> Mind Habits Bootcamp</h3>
+        <p>Develop mental routines that build focus, discipline, and positivity for long-term success and balance.</p>
+      </div>
+      
+    </div>
+  </section>
+
+  
+  <footer>
+    © 2025 MindGrow. All rights reserved. | Designed with calm and clarity.
+  </footer>
+</body>
+</html>

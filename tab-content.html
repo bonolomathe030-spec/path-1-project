@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neon Tabbed Interface</title>
+
+<style>
+  body {
+    margin: 0;
+    font-family: 'Trebuchet MS', sans-serif;
+    background: #0d0d0d;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .tab-container {
+    width: 600px;
+    text-align: center;
+  }
+
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
+
+  .tab-button {
+    padding: 12px 25px;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background: transparent;
+    border: 2px solid #555;
+    border-radius: 30px;
+    transition: 0.4s;
+    font-size: 16px;
+  }
+
+  .tab-button:hover {
+    border-color: #00eaff;
+    transform: scale(1.05);
+  }
+
+  .active {
+    border-color: #00eaff;
+    box-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff inset;
+    transform: scale(1.1);
+    font-weight: bold;
+  }
+
+  .tab-content {
+    display: none;
+    background: rgba(0, 238, 255, 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    animation: fade 0.6s ease-in-out;
+    box-shadow: 0 0 25px #00eaff50;
+  }
+
+  .show {
+    display: block;
+  }
+
+  @keyframes fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="tab-container">
+  <h1 style="color:#00eaff;"> Tabbed Interface</h1>
+
+  <!-- Tab Buttons -->
+  <div class="tabs">
+    <button class="tab-button active" onclick="switchTab('t1')">⚡ Power</button>
+    <button class="tab-button" onclick="switchTab('t2')">🌌 Galaxy</button>
+    <button class="tab-button" onclick="switchTab('t3')">🔮 Vision</button>
+  </div>
+
+  <!-- Content -->
+  <div id="t1" class="tab-content show">
+    <h2> Power Mode</h2>
+    <p>You have entered the power core. Here lies energy, confidence, and unstoppable motion.</p>
+	<h3>What is Power Mode?</h3>
+<p>Power Mode is a mental ignition point. It’s when potential becomes momentum — when you stop planning and start executing. In this state, distractions fade, clarity sharpens, and your ideas begin to take life.</p>
+
+<blockquote style="border-left:4px solid #00eaff; padding-left:10px; font-style:italic;">
+  "Power doesn't come from strength — it comes from the decision to act."
+</blockquote>
+
+  </div>
+
+  <div id="t2" class="tab-content">
+    <h2> Galaxy Mode</h2>
+    <p>Explore cosmic ideas, swirling creativity, and thoughts beyond the stars.</p>
+	<h3>What is Galaxy Mode?</h3>
+<p>Galaxy Mode represents a mind without boundaries — a state where imagination stretches beyond logic, and ideas orbit like stars in a cosmic playground. Here, curiosity replaces fear, and possibilities multiply faster than galaxies expanding across the universe.</p>
+<blockquote style="border-left:4px solid #6be0ff; padding-left:12px; font-style:italic;">
+  "The universe is not limited by imagination — imagination is limited by the universe you believe in."
+</blockquote>
+  </div>
+
+  <div id="t3" class="tab-content">
+    <h2>Vision Mode</h2>
+    <p>This tab reveals intuition, imagination, and insight shaping the unseen future.</p>
+	<h3>What is Vision Mode?</h3>
+<p>Vision Mode is the ability to see beyond the present moment. It’s where intuition, insight, and imagination merge, allowing you to predict possibilities before they happen. In this state, you don’t just observe reality — you design it.</p>
+<blockquote style="border-left:4px solid #ab3cff; padding-left:12px; font-style:italic;">
+  "Vision is the art of seeing what is invisible to others."
+</blockquote>
+
+  </div>
+</div>
+
+<script>
+function switchTab(tabId) {
+  const contents = document.querySelectorAll('.tab-content');
+  const buttons = document.querySelectorAll('.tab-button');
+
+  contents.forEach(content => content.classList.remove('show'));
+  buttons.forEach(btn => btn.classList.remove('active'));
+
+  document.getElementById(tabId).classList.add('show');
+  event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>
