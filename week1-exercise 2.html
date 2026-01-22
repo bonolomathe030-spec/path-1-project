@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Broadcast Control Form</title>
+  <style>
+    
+    body {
+      Version A
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #001f3f, #004080, #0066cc);
+      background-size: 300% 300%;
+      animation: gradientShift 8s infinite alternate;
+      color: #e0e0e0;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: left top; }
+      100% { background-position: right bottom; }
+    }
+	
+    .form-container {
+      max-width: 420px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 25px rgba(0, 100, 255, 0.3);
+      margin: 80px auto;
+      padding: 30px;
+      color: #fff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 24px;
+      text-shadow: 0 0 8px #00bfff;
+      letter-spacing: 1px;
+    }
+
+    =    label {
+      display: block;
+      font-weight: 600;
+      margin-top: 18px;
+      color: #aaddff;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="time"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 15px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #00bfff;
+      box-shadow: 0 0 10px #00bfff;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    
+    .checkbox-group {
+      margin-top: 15px;
+    }
+
+    .checkbox-group label {
+      display: inline-block;
+      color: #aaddff;
+      font-weight: normal;
+    }
+
+    input[type="checkbox"] {
+      accent-color: #00bfff;
+      transform: scale(1.3);
+      margin-right: 6px;
+    }
+
+   
+    button {
+      margin-top: 25px;
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(90deg, #00bfff, #0077ff);
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.5px;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px #00bfff;
+      background: linear-gradient(90deg, #0099ff, #00ccff);
+    }
+
+   
+    .success-message {
+      display: none;
+      text-align: center;
+      margin-top: 25px;
+      font-size: 18px;
+      color: #00ff99;
+      text-shadow: 0 0 10px #00ffcc;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+ 
+    @media (max-width: 480px) {
+      .form-container {
+        margin: 40px 20px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>🎙️Broadcast Control Form🎙️</h2>
+    <form id="broadcastForm">
+      <label for="programName">Program Title</label>
+      <input type="text" id="programName" name="programName" placeholder="Enter show name" required>
+
+      <label for="description">Program Summary</label>
+      <textarea id="description" name="description" rows="3" placeholder="Short show description..." required></textarea>
+
+      <label for="duration">Runtime (minutes)</label>
+      <input type="number" id="duration" name="duration" min="1" placeholder="e.g. 45" required>
+
+      <label for="timeSlot">Broadcast Time</label>
+      <input type="time" id="timeSlot" name="timeSlot" required>
+
+      <label for="channel">Transmission Channel</label>
+      <select id="channel" name="channel" required>
+        <option value="">Select a Channel</option>
+        <option>SABC1</option>
+        <option>SABC2</option>
+        <option>SABC3</option>
+        <option>eTV</option>
+      </select>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="isLive" name="isLive">
+        <label for="isLive">This program is broadcast live</label>
+      </div>
+
+      <button type="submit">Launch Broadcast</button>
+    </form>
+
+    <p id="successMessage" class="success-message">Transmission successfully launched!</p>
+  </div>
+
+  <script>
+    const form = document.getElementById('broadcastForm');
+    const message = document.getElementById('successMessage');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      message.style.display = 'block';
+      form.reset();
+      // Optional glowing flash effect
+      message.style.animation = 'fadeIn 1s ease';
+      setTimeout(() => message.style.display = 'none', 4000);
+    });
+  </script>
+
+</body>
+</html>
