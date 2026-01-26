@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Switcher</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background-color 0.5s ease;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      margin: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 6px;
+      color: white;
+    }
+
+    #calmBtn { background-color: #4da6ff; }
+    #energyBtn { background-color: #ff884d; }
+    #nightBtn { background-color: #333; }
+  </style>
+</head>
+
+<body>
+
+  <h1>Select Your Mood</h1>
+
+  <button id="calmBtn" class="btn">Calm</button>
+  <button id="energyBtn" class="btn">Energetic</button>
+  <button id="nightBtn" class="btn">Dark Mode</button>
+
+
+  <script>
+    // Calm button
+    document.getElementById("calmBtn").addEventListener("click", function() {
+      document.body.style.backgroundColor = "#add8e6"; // light blue
+    });
+
+    // Energetic button
+    document.getElementById("energyBtn").addEventListener("click", function() {
+      document.body.style.backgroundColor = "#ffcc99"; // orange peach
+    });
+
+    // Night Mode button
+    document.getElementById("nightBtn").addEventListener("click", function() {
+      document.body.style.backgroundColor = "#1a1a1a"; // dark
+    });
+  </script>
+
+</body>
+</html>

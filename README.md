@@ -11,7 +11,7 @@ This is a website that lets users slide images forward and backward. It works on
 
 ## How to Run
 1. Download or clone the project
-2. Open `index.html` in a web browser
+2. Open your "index.html" in a web browser
 3. Click the "Next" and "Prior" buttons to see images
 
 ## Technologies Used

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physical Science Program</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #3e3a3a;
+      color: #f4f4f4;
+      font-style: italic;
+    }
+
+    h1 {
+      color: #e3f2fd;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .program-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 50px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);  /* 3 columns */
+    }
+
+    .program-card {
+      background: #e3f2fd;
+      border-radius: 10px;
+      width: 80%;
+      text-align: center;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: transform 0.2s;
+      color: #333;
+      font-style: normal;
+    }
+
+    .program-card:hover {
+      transform: scale(1.07);
+    }
+
+    .program-card img {
+      width: 100%;
+      border-radius: 10px;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .program-card h3 {
+      color: #004080;
+      margin-top: 10px;
+    }
+
+    .program-card p {
+      color: #555;
+      padding: 0 10px;
+    }
+
+    /* NEW: Duration & Time styling */
+    .details {
+      font-style: italic;
+      color: #333;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    /* FIXED MEDIA QUERY — Your original media query was incorrect */
+    @media (max-width: 600px) {
+      .program-container {
+        grid-template-columns: 1fr; /* stack vertically */
+        gap: 20px;
+      }
+
+      .program-card {
+        width: 100%;
+      }
+    }
+
+    .site-footer {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+      margin-top: 40px;
+    }
+
+    .site-footer p {
+      margin: 5px 0;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Physical Science Program</h1>
+
+  <div class="program-container">
+
+    <div class="program-card">
+      <img src="FIZIKS.jpg" alt="Physics">
+      <h3>Physics</h3>
+      <p>Explore motion, forces, energy, and the fundamental laws that govern our universe.</p>
+      <p class="details">Duration: 3 Months</p>
+      <p class="details">Time: 10:00 – 12:00</p>
+    </div>
+
+    <div class="program-card">
+      <img src="CHEM.jpg" 
+      <h3>Chemistry</h3>
+      <p>Study matter, reactions, and how different substances combine to form new materials.</p>
+      <p class="details">Duration: 2 Months</p>
+      <p class="details">Time: 14:00 – 16:00</p>
+    </div>
+
+    <div class="program-card">
+      <img src="ast.jpg" 
+      <h3>Astronomy</h3>
+      <p>Learn about planets, galaxies, stars, and the structure of the cosmos.</p>
+      <p class="details">Duration: 1.5 Months</p>
+      <p class="details">Time: 18:00 – 19:30</p>
+    </div>
+
+    <div class="program-card">
+      <img src="eo.jpg"
+      <h3>Geology</h3>
+      <p>Understand Earth’s layers, rocks, minerals, and how our planet changes over time.</p>
+      <p class="details">Duration: 2.5 Months</p>
+      <p class="details">Time: 08:00 – 10:00</p>
+    </div>
+
+    <div class="program-card">
+      <img src="en.jpg"
+      <h3>Environmental Science</h3>
+      <p>Discover how living things interact with their surroundings and how to protect our planet.</p>
+      <p class="details">Duration: 3 Months</p>
+      <p class="details">Time: 13:00 – 15:00</p>
+    </div>
+
+    <div class="program-card">
+      <img src="lab.jpg" 
+      <h3>Laboratory Skills</h3>
+      <p>Gain essential hands-on skills used in scientific experiments and research.</p>
+      <p class="details">Duration: 1 Month</p>
+      <p class="details">Time: 16:00 – 17:30</p>
+    </div>
+
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2025 Web Development Bootcamp</p>
+  </footer>
+
+</body>
+</html>

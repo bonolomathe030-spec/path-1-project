@@ -1,0 +1,2 @@
+# ignore all .jpg and .zip files
+*.jpg and .zip

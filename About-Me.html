@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - Bonolo Mathe</title>
+    <link rel="stylesheet" href="style.css">
+	
+	<style>
+body {
+    margin: 0;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    background: url('dark-bg.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #f0f0f0;
+    text-align: center;
+    line-height: 1.6;
+}
+
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 10, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: -1;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-top: 30px;
+    color: #ffffff;
+    text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.2);
+}
+
+
+nav {
+    margin: 20px 0;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 0 15px;
+    padding: 8px 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+nav a:hover {
+    color: #fff;
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+section {
+    margin: 40px auto;
+    width: 80%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+section h2 {
+    color: #f9f9f9;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+
+/* === HOBBIES === */
+.hobby {
+    margin-bottom: 30px;
+}
+
+.hobby h3 {
+    color: #ffdf6c;
+    font-size: 1.3em;
+}
+
+.hobby p {
+    color: #ddd;
+    margin-bottom: 10px;
+}
+
+
+.hobby img {
+    width: 240px;
+    height: 240px;
+    border-radius: 15px;  
+    border: 4px solid #444;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+    object-fit: cover;
+    transition: transform 2s ease-in-out, box-shadow 0.5s;
+}
+
+.hobby img:hover {
+    transform: rotate(360deg) scale(1.1);
+    box-shadow: 0 0 35px rgba(255, 255, 255, 0.4);
+}
+
+footer {
+    margin-top: 50px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #bbb;
+    font-size: 0.9em;
+}
+
+	</style>
+</head>
+<body>
+
+    <header>
+        <h1>About Me</h1>
+    </header>
+
+    <nav>
+
+    <section>
+        <h2>Who I Am</h2>
+        <p class="bio">
+                Hi! I'm BONOLO, B'ee to keep it short,i am a passionate digital creator and aspiring software developer residing in Soweto, naledi.
+                I love learning about technology, science, exploring new ideas, and connecting with people through creativity.
+                When I’m not researching new things about coding, I enjoy traveling, trying out new food, shopping, reading science books, and drawing some biology stuff,and sleeping.
+                I want to inspire others to follow their passions.
+        </p>
+    </section>
+
+    <section>
+        <h2>My Hobbies</h2>
+
+        <div class="hobby">
+            <h3>Photography</h3>
+            <p>I love capturing beautiful moments and telling stories through my photos.</p>
+        <IMG SRC="prfileimage.jpg">
+		 <IMG SRC="poto.jpg">
+        </div>
+
+        <div class="hobby">
+            <h3>Traveling</h3>
+            <p>Exploring new cultures and discovering hidden places is one of my biggest joys.</p>
+			   <IMG SRC="travellig.jpg">
+			   <IMG SRC="food1.jpg">
+        </div>
+
+        <div class="hobby">
+            <h3>Tryng out new food</h3>
+            <p>trying out new food, enables me to unwind and see and eat creative food with flavors and presentation.</p>
+           <IMG SRC="food2.jpg">
+        </div>
+		
+		<div class="hobby">
+            <h3>shopping</h3>
+            <p>As a woman, shopping makes feel happy in an amazing manner, the feeling is underated!!</p>
+           <IMG SRC="shopping.jpg">
+        </div>
+
+      <div class="hobby">
+    <h3>Music</h3>
+    <p>Music is my inspiration — I enjoy listening, and discovering new sounds.</p>
+   <IMG SRC="music.jpg">
+
+</div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Bonolo Mathe</p>
+    </footer>
+
+</body>
+</html>

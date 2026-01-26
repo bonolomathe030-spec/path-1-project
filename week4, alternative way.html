@@ -1,0 +1,418 @@
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+ <meta charset="utf-8" />
+ <meta name="viewport" content="width=device-width,initial-scale=1" />
+ <title>Program Manager</title>
+ <link rel="stylesheet" href="style.css" />
+ 
+  <style>
+ /* Reset-ish */
+ * { box-sizing: border-box; }
+ html,body{height:100%;}
+ body{
+ margin:0;
+ 2
+font-family: Inter, system-ui,-apple-system, 'Segoe UI', Roboto, 'Helvetica 
+Neue', Arial;
+ background: linear-gradient(135deg,#0f172a 0%, #071023 100%);
+ color:#e6eef8;-webkit-font-smoothing:antialiased;
+ font-style:bold;
+ color:black;
+ 
+ }
+ .container{
+ max-width:1100px;
+ margin:24px auto;
+ padding:16px;
+ display:grid;
+ grid-template-columns: 1fr 1.2fr;
+ gap:20px;
+ }
+ .site-header{
+ text-align:center;
+ padding:20px 0 0;
+ }
+ .site-header h1{margin:0;font-size:1.8rem}
+ .site-header .lead{margin:6px 0 18px;color:#bcd3ee}
+ .form-section, .list-section{
+ background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,
+ 0.02));
+ padding:16px;
+ border-radius:12px;
+ box-shadow:0 6px 18px rgba(2,6,23,0.6);
+ }
+ label{display:block;margin-top:12px;font-weight:600}
+ input[type=text], input[type=number], input[type=time], textarea,
+ input[type=search]{
+ width:100%;
+ padding:10px 12px;
+ margin-top:6px;
+ border-radius:8px;
+ border:1px solid rgba(255,255,255,0.08);
+ background: rgba(255,255,255,0.02);
+ color:inherit;
+ outline:none;
+ }
+ input:focus, textarea:focus{box-shadow:0 0 0 3px rgba(99,102,241,0.12);border
+color:rgba(99,102,241,0.7)}
+ textarea{resize:vertical}
+ small.error{display:block;color:#ffb4b4;margin-top:6px;min-height:18px}
+ .form-actions{display:flex;gap:8px;margin-top:14px;align-items:center}
+ button{padding:10px 14px;border-radius:10px;border:0;font-weight:
+ 3
+700;cursor:pointer}
+ button:disabled{opacity:0.55;cursor:not-allowed}
+ #submitBtn{background:linear-gradient(90deg,#7c5cff,#4f46e5);color:white}
+ #cancelEditBtn{background:transparent;color:#cbd5e1;border:1px solid rgba(255,
+ 255,255,0.06)}
+ .invisible{display:none}
+ .list-header{display:flex;gap:12px;align-items:center}
+ #search{flex:1;padding:10px;border-radius:10px}
+ #count{color:#bcd3ee}
+ .program-list{margin-top:12px;display:flex;flex-direction:column;gap:12px}
+ .program-card{padding:12px;border-radius:12px;background:linear
+gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,
+ 0.01));display:flex;flex-direction:column;gap:8px;border:1px solid rgba(255,255,
+ 255,0.03)}
+ .card-top{display:flex;justify-content:space-between;align-items:center}
+ .card-title{font-weight:800}
+ .card-meta{font-size:0.9rem;color:#c6d8f2}
+ .card-actions{display:flex;gap:8px}
+ .action-btn{padding:6px 8px;border-radius:8px;border:0;cursor:pointer;font
+weight:700}
+ .edit-btn{background:#fef3c7;color:#92400e}
+ .delete-btn{background:#fee2e2;color:#7f1d1d}
+ .no-programs{padding:18px;text-align:center;color:#c6d8f2}
+ .site-footer{max-width:1100px;margin:18px auto 40px;text
+align:center;color:#9fb0d9}
+ /* Responsive */
+ @media (max-width:900px){
+ .container{grid-template-columns:1fr;padding:12px}
+ .list-section{order:2}
+ .form-section{order:1}
+ </style>
+ 
+ </head>
+ 
+ 
+ <body>
+ 
+ <header class="site-header">
+ <h1>Program Manager</h1>
+ <p class="lead">Add, edit, delete and search broadcast programs — stored in 
+<code>localStorage</code>.</p>
+ </header>
+ <main class="container">
+ <section class="form-section">
+ <h2 id="form-title">Add New Program</h2>
+ <form id="programForm" novalidate>
+ <input type="hidden" id="programId">
+ <label for="name">Program name</label>
+ <input id="name" name="name" type="text" autocomplete="off" required>
+ <small class="error" id="nameError"></small>
+ <label for="description">Description</label>
+ <textarea id="description" name="description" rows="3" required></textarea>
+ <small class="error" id="descError"></small>
+ <label for="duration">Duration (minutes)</label>
+ <input id="duration" name="duration" type="number" min="1" max="300"
+ required>
+ <small class="error" id="durationError"></small>
+ 
+<label for="timeSlot">Start time</label>
+ <input id="timeSlot" name="timeSlot" type="time" required>
+ <small class="error" id="timeError"></small>
+ <label for="channel">Channel</label>
+ <input id="channel" name="channel" type="text" required>
+ <small class="error" id="channelError"></small>
+ <div class="form-actions">
+ <button id="submitBtn" type="submit" disabled>Add Program</button>
+ <button id="cancelEditBtn" type="button" class="invisible">Cancel</button>
+ </div>
+ <div id="formMessage" aria-live="polite"></div>
+ </form>
+ </section>
+ <section class="list-section">
+ <div class="list-header">
+ <input id="search" type="search" placeholder="Search programs by 
+name..." autocomplete="off">
+ <div id="count"></div>
+ </div>
+ <div id="programList" class="program-list"></div>
+ </section>
+ </main>
+ <footer class="site-footer">
+ <small>Built with HTML/CSS/JS • localStorage</small>
+ </footer>
+ <script 
+ 
+ // ===== Program Manager (script.js) =====
+ // Key features implemented:
+
+ // - Add, edit, delete programs stored in localStorage
+ // - Search/filter by name
+ // - Form validation with disabled submit button
+ 4
+// - Confirmation for delete
+ // - Clear UI messages and accessibility hints
+ const LOCAL_KEY = 'programs';
+ // DOM refs
+ const programForm = document.getElementById('programForm');
+ const submitBtn = document.getElementById('submitBtn');
+ const cancelEditBtn = document.getElementById('cancelEditBtn');
+ const formTitle = document.getElementById('form-title');
+ const programIdInput = document.getElementById('programId');
+ const nameInput = document.getElementById('name');
+ const descriptionInput = document.getElementById('description');
+ const durationInput = document.getElementById('duration');
+ const timeSlotInput = document.getElementById('timeSlot');
+ const channelInput = document.getElementById('channel');
+ const programListEl = document.getElementById('programList');
+ const searchInput = document.getElementById('search');
+ const formMessage = document.getElementById('formMessage');
+ const countEl = document.getElementById('count');
+ // error fields
+ const nameError = document.getElementById('nameError');
+ const descError = document.getElementById('descError');
+ const durationError = document.getElementById('durationError');
+ const timeError = document.getElementById('timeError');
+ const channelError = document.getElementById('channelError');
+ let programs = []; // in-memory array
+ let isEditing = false;
+ // --- Utilities --
+function loadPrograms() {
+ try {
+ const raw = localStorage.getItem(LOCAL_KEY);
+ programs = raw ? JSON.parse(raw) : [];
+ if (!Array.isArray(programs)) programs = [];
+ } catch (e) {
+ console.error('Could not parse programs from localStorage', e);
+ programs = [];
+ }
+ }
+ function savePrograms() {
+ localStorage.setItem(LOCAL_KEY, JSON.stringify(programs));
+ }
+ function generateId() {
+ 5
+return Date.now().toString(36) + Math.random().toString(36).slice(2,8);
+ }
+ // --- Validation --
+function validateForm() {
+ let valid = true;
+ clearErrors();
+ const nameVal = nameInput.value.trim();
+ const descVal = descriptionInput.value.trim();
+ const durationVal = durationInput.value.trim();
+ const timeVal = timeSlotInput.value;
+ const channelVal = channelInput.value.trim();
+ if (!nameVal) { nameError.textContent = 'Program name is required'; valid =
+ false; }
+ if (!descVal) { descError.textContent = 'Description is required'; valid =
+ false; }
+ if (!durationVal) {
+ durationError.textContent = 'Duration is required';
+ valid = false;
+ } else {
+ const d = Number(durationVal);
+ if (Number.isNaN(d) || !Number.isFinite(d)) {
+ durationError.textContent = 'Duration must be a number';
+ valid = false;
+ } else if (d < 1 || d > 300) {
+ durationError.textContent = 'Duration must be between 1 and 300 minutes';
+ valid = false;
+ }
+ }
+ if (!timeVal) { timeError.textContent = 'Start time is required'; valid =
+ false; }
+ if (!channelVal) { channelError.textContent = 'Channel is required'; valid =
+ false; }
+ submitBtn.disabled = !valid;
+ return valid;
+ }
+ function clearErrors() {
+ [nameError, descError, durationError, timeError, channelError].forEach(el =>
+ el.textContent = '');
+ }
+ function clearFormMessage() {
+ 6
+formMessage.textContent = '';
+ formMessage.className = '';
+ }
+ function showFormMessage(text, type = 'success') {
+ formMessage.textContent = text;
+ formMessage.className = type === 'error' ? 'msg-error' : 'msg-success';
+ }
+ // --- Render --
+function renderPrograms(filter = '') {
+ const q = filter.trim().toLowerCase();
+ const filtered = programs.filter(p => p.name.toLowerCase().includes(q));
+ programListEl.innerHTML = '';
+ if (filtered.length === 0) {
+ programListEl.innerHTML =
+ '<div class="no-programs">No programs yet. Add one using the form.</div>';
+ countEl.textContent = '0 programs';
+ return;
+ }
+ countEl.textContent = `${filtered.length} program${filtered.length > 1 ?
+ 's' : ''}`;
+ filtered.forEach(p => {
+ const card = document.createElement('article');
+ card.className = 'program-card';
+ card.dataset.id = p.id;
+ const top = document.createElement('div'); top.className = 'card-top';
+ const title = document.createElement('div'); title.innerHTML = `<div 
+class="card-title">${escapeHtml(p.name)}</div><div class="card-meta">$
+ {escapeHtml(p.channel)} • ${formatTime(p.timeSlot)} • ${p.duration} min</div>`;
+ const actions = document.createElement('div'); actions.className = 'card
+actions';
+ const editBtn = document.createElement('button');
+ editBtn.textContent = 'Edit';
+ editBtn.className = 'action-btn edit-btn';
+ editBtn.addEventListener('click', () => startEditProgram(p.id));
+ const deleteBtn = document.createElement('button');
+ deleteBtn.textContent = 'Delete';
+ deleteBtn.className = 'action-btn delete-btn';
+ deleteBtn.addEventListener('click', () => deleteProgram(p.id));
+ 7
+actions.appendChild(editBtn);
+ actions.appendChild(deleteBtn);
+ top.appendChild(title);
+ top.appendChild(actions);
+ const desc = document.createElement('p');
+ desc.textContent = p.description;
+ card.appendChild(top);
+ card.appendChild(desc);
+ programListEl.appendChild(card);
+ });
+ }
+ function formatTime(timeStr) {
+ // if empty just return as-is
+ if (!timeStr) return '';
+ // timeStr is like "HH:MM"; return in same format or localized
+ return timeStr;
+ }
+ function escapeHtml(text) {
+ return String(text)
+ .replace(/&/g, '&amp;')
+ .replace(/</g, '&lt;')
+ .replace(/>/g, '&gt;')
+ .replace(/"/g, '&quot;')
+ .replace(/'/g, '&#039;');
+ }
+ // --- CRUD actions --
+function addProgram(data) {
+ programs.push(data);
+ savePrograms();
+ renderPrograms(searchInput.value);
+ }
+ function updateProgram(id, updates) {
+ const idx = programs.findIndex(p => p.id === id);
+ if (idx ===-1) return false;
+ programs[idx] = { ...programs[idx], ...updates };
+ savePrograms();
+ renderPrograms(searchInput.value);
+ return true;
+ }
+ function startEditProgram(id) {
+ 8
+const p = programs.find(x => x.id === id);
+ if (!p) return showFormMessage('Program not found for editing', 'error');
+ isEditing = true;
+ programIdInput.value = p.id;
+ nameInput.value = p.name;
+ descriptionInput.value = p.description;
+ durationInput.value = p.duration;
+ timeSlotInput.value = p.timeSlot;
+ channelInput.value = p.channel;
+ formTitle.textContent = 'Edit Program';
+ submitBtn.textContent = 'Update Program';
+ cancelEditBtn.classList.remove('invisible');
+ validateForm();
+ clearFormMessage();
+ }
+ function cancelEdit() {
+ isEditing = false;
+ programIdInput.value = '';
+ programForm.reset();
+ formTitle.textContent = 'Add New Program';
+ submitBtn.textContent = 'Add Program';
+ cancelEditBtn.classList.add('invisible');
+ clearErrors();
+ clearFormMessage();
+ submitBtn.disabled = true;
+ }
+ function deleteProgram(id) {
+ const p = programs.find(x => x.id === id);
+ if (!p) return showFormMessage('Program not found', 'error');
+ const confirmed = window.confirm(`Delete "${p.name}"? This cannot be 
+undone.`);
+ if (!confirmed) return;
+ programs = programs.filter(x => x.id !== id);
+ savePrograms();
+ renderPrograms(searchInput.value);
+ showFormMessage('Program deleted');
+ }
+ // --- Form submit --
+programForm.addEventListener('submit', function (evt) {
+ evt.preventDefault();
+ clearFormMessage();
+ 9
+if (!validateForm()) {
+ showFormMessage('Fix validation errors first', 'error');
+ return;
+ }
+ const payload = {
+ name: nameInput.value.trim(),
+ description: descriptionInput.value.trim(),
+ duration: Number(durationInput.value),
+ timeSlot: timeSlotInput.value,
+ channel: channelInput.value.trim()
+ };
+ if (isEditing && programIdInput.value) {
+ const ok = updateProgram(programIdInput.value, payload);
+ if (ok) {
+ showFormMessage('Program updated');
+ cancelEdit();
+ } else {
+ showFormMessage('Could not update program', 'error');
+ }
+ return;
+ }
+ // new program
+ const newProgram = { id: generateId(), ...payload };
+ addProgram(newProgram);
+ showFormMessage('Program added');
+ programForm.reset();
+ submitBtn.disabled = true;
+ });
+ // --- Inputs: live validation --
+[nameInput, descriptionInput, durationInput, timeSlotInput,
+ channelInput].forEach(inp => {
+ inp.addEventListener('input', () => {
+ validateForm();
+ clearFormMessage();
+ });
+ });
+ cancelEditBtn.addEventListener('click', cancelEdit);
+ // --- Search --
+searchInput.addEventListener('input', (e) => {
+ renderPrograms(e.target.value);
+ });
+ 10
+// --- Init --
+function init() {
+ loadPrograms();
+ renderPrograms();
+ // ensure button state follows validation if form prefilled
+ submitBtn.disabled = true;
+ }
+ init();
+ </script>
+ 
+ </body>
+ 
+ </html>
+
+
